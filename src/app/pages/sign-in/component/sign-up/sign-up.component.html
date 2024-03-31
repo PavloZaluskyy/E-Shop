@@ -1,0 +1,55 @@
+<mat-drawer-container [autosize]="true" class="min-h-full max-w-7xl mx-auto border-x">
+    <div class="wrapper">
+        <div class="go_to_store flex">
+            <button mat-raised-button color="primary" routerLink="/home"><mat-icon
+                    class="text-while-500">arrow_back</mat-icon> Go to Back Store</button>
+        </div>
+        <div class="form-panel">
+            <mat-card class="example-card" >
+                <mat-card-header>
+                    <mat-card-title-group>
+                        <mat-card-title>E-Shop</mat-card-title>
+                        <mat-card-subtitle>Sign Up to site</mat-card-subtitle>
+                    </mat-card-title-group>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Create a Login*</mat-label>
+                        <input [class.not_valid_price]="!isNotValid" matInput [(ngModel)]="login">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>First Name*</mat-label>
+                        <input [class.not_valid_price]="!isNotValid" matInput [(ngModel)]="firstName">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Last Name*</mat-label>
+                        <input [class.not_valid_price]="!isNotValid" matInput [(ngModel)]="lastName">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Telephone*</mat-label>
+                        <span matTextPrefix>+&nbsp;</span>
+                        <input type="tel" [class.not_valid_price]="!isNotValid" matInput [(ngModel)]="phone">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>E-mail*</mat-label>
+                        <input type="email" [class.not_valid_price]="!isNotValid" matInput [(ngModel)]="email">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Create Password*</mat-label>
+                        <input type="password" [class.not_valid_price]="!isNotValid"  #pass [(ngModel)]="password" matInput>
+                        <div>
+                            <input type="checkbox" class="example-margin" (click)="showPassword(pass)"><label class="label-checkbox" for="remember">Show Password</label> 
+                        </div>
+                        <div>
+                            <span class="err-price-massege" *ngIf="!isNotValid">Not correct login or password</span>
+                        </div>
+                    </mat-form-field>
+                    <div>
+                        <span class="err-price-massege" *ngIf="!isNotValid">{{errMess}}</span>
+                    </div>
+                    <button (click)="onSignUp()" mat-raised-button color="primary"> Sign Up</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</mat-drawer-container>

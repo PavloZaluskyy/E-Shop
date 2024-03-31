@@ -1,0 +1,72 @@
+<mat-toolbar class="justify-between  mx-auto border-x">
+    <a routerLink="home">E-Shop</a>
+    <div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon
+                [matBadge]="itemsQuantity"
+                [matBadgeHidden]="!itemsQuantity"
+                matBadgeColor="warn"
+                >shopping_cart</mat-icon
+            >
+          </button>
+          <button mat-raised-button routerLink="signIn" *ngIf="!client" color="primary" class="m-r-1">Sign In</button>
+          <button mat-raised-button routerLink="signUp" *ngIf="!client" color="primary">Sign Up</button>
+          <button mat-icon-button  [matMenuTriggerFor]="account">
+            <mat-icon matBadgeColor="warn" *ngIf="client" class="material-icons">
+                account_circle
+                </mat-icon>
+            </button>
+          <mat-menu #account="matMenu">
+            <div class="p-3 divide-y divide-solid" *ngIf="client">
+                <div class="pb-3 flex justify-between">
+                    <img  *ngIf="client.photo" [src]="client.photo ? client.photo : '../../../assets/not_photo.png'" class="acc_photo" alt="photo">
+                    <img src="../../../assets/not_photo.png" *ngIf="!client.photo" class="acc_photo mr-16" alt="photo">
+                    <div class="flex flex-column">
+                        <span>{{client.name}}</span>
+                        <span class="span-email">{{client.email}}</span>
+                    </div>
+                    
+                </div>
+                <div class="flex flex-column">
+                    <button mat-raised-button [routerLink]="['profile', client.username]" color="primary" class="m-t-1">Profile</button>
+                    <button mat-raised-button routerLink="Shares" color="primary" class="m-t-1">Shares</button>
+                    <button mat-raised-button routerLink="signOut" (click)="onSignOut()" color="primary" class="m-t-1">Sign Out</button>
+                </div>
+            </div>
+          </mat-menu>
+          <mat-menu #menu="matMenu">
+            <div class="p-3 divide-y divide-solid">
+                <div class="pb-3 flex justify-between">
+                    <span class="mr-16">{{cart.items.length}} items</span>
+                    <a routerLink="cart">View Cart</a>  
+                </div>
+                <div *ngIf="cart.items.length" class="py-3">
+                    <div *ngFor="let item of cart.items" class="flex justify-between font-light mb-2">
+                        {{item.name}} <span *ngIf="item.chooseDetail">[<span *ngFor="let choose of item.chooseDetail">{{choose}}, </span>]</span>  x {{item.quantity}}
+                        <span class="font-bold not-italic">{{ item.price| currency }}</span>
+                    </div>
+                </div>
+    
+                <div class="flex justify-between py-3 font-light">
+                    Total: 
+                    <span class="font-bold not-italic">{{ getTotal(cart.items) | currency}}</span>
+                </div>
+    
+                <div class="pt-3 flex justify-between">
+                    <button 
+                      (click)="onClearCart()"
+                      class="bg-rose-600 text-white rounded-full w-9 h-9">
+                      <mat-icon>remove_shopping_cart</mat-icon>
+                    </button>
+                    <button
+                        routerLink="cart"
+                        class="bg-green-600 text-white rounded-full w-9 h-9">
+                        <mat-icon>shopping_cart_checkout</mat-icon>
+                    </button>
+                </div>  
+            </div>
+          </mat-menu>
+
+    </div>
+    
+  </mat-toolbar>

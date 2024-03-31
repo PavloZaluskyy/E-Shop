@@ -1,0 +1,32 @@
+<mat-drawer-container  [autosize]="true"
+    class="min-h-full max-w-7x1 mx-auto border-x">
+    <mat-drawer mode="side" opened class="p-6">
+        <app-filters (filters)="onChangeFilter($event)" 
+                     (categoriesEmit)="onChangeCategory($event)"
+                     (clearFilter)="onClearFilter($event)"
+                     [brandsArr]="inputOnFilterComponent.brandsArr"
+                     [connectorArr]="inputOnFilterComponent.connector"
+                     [compatibilityArr]="inputOnFilterComponent.compatibility"
+                     [sizeArr]="inputOnFilterComponent.size"
+                     [diagonalArr]="inputOnFilterComponent.diagonal"
+                     [screenExtensionArr]="inputOnFilterComponent.screenExtension"
+                     [refreshRateArr]="inputOnFilterComponent.refreshRate"
+                     [matrixTypeArr]="inputOnFilterComponent.matrixType"
+                     [materialArr]="inputOnFilterComponent.material"
+                     [purposeArr]="inputOnFilterComponent.purpose"
+                     [minMaxPrice]="minMaxPrice"
+                     ></app-filters>
+    </mat-drawer>
+    <mat-drawer-content mode="side" class="p-6">
+        <h1>Category: {{category | titlecase}} <span *ngIf="subCategory"> > {{subCategory}}</span></h1>
+        <app-product-header (sortChange)="onSortChange($event)" (columnsCountChange)="onColumnsCountChange($event)"></app-product-header>
+        <mat-grid-list
+            gutterSize="16"
+            [cols]="cols"
+            [rowHeight]="rowHeight">
+                <mat-grid-tile *ngFor="let product of products" >
+                    <app-product-box (addToCart)="onAddToCart($event)" [product]='product' class="w-full" [fullWidthMode]="cols === 1"></app-product-box>
+                </mat-grid-tile>
+        </mat-grid-list>
+    </mat-drawer-content>
+</mat-drawer-container>

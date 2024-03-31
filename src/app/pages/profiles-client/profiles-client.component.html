@@ -1,0 +1,54 @@
+<mat-drawer-container  [autosize]="true" class="min-h-full max-w-7xl mx-auto border-x">
+    <div class="wrapper">
+        <div class="go_to_store flex">
+            <button mat-raised-button color="primary" routerLink="/home"><mat-icon class="text-while-500">arrow_back</mat-icon> Go to Back Store</button>
+        </div>
+
+        <div class="flex align-stretch center self-center">
+            <div class="img">
+                <img src="../../../assets/not_photo.png">
+            </div>
+            <div class="info">
+                <mat-tab-group>
+                    <mat-tab label="Personal data"> 
+                        <div class="text-label">
+                            <span class="span-placeholder" >Name</span>
+                            <span>{{client.name}}</span>
+                        </div>
+                        <div class="text-label">
+                            <span class="span-placeholder" >Phone</span>
+                            <span>{{client.phone}}</span>
+                        </div>
+                        <div class="text-label">
+                            <span class="span-placeholder" >E-Mail</span>
+                            <span>{{client.email}}</span>
+                        </div>
+                        <div class="text-label">
+                            <span class="span-placeholder" >Company</span>
+                            <span>{{client.company ? client.company : '-'}}</span>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Address">
+                        <div class="text-label">
+                            <span class="span-placeholder" >Country</span>
+                            <span>{{client.country ? client.country : '-'}}</span>
+                        </div>
+                        <div class="text-label">
+                            <span class="span-placeholder" >State</span>
+                            <span>{{client.state ? client.state : '-'}}</span>
+                        </div>
+                        <div class="text-label">
+                            <span class="span-placeholder" >Address</span>
+                            <span>{{client.address ? client.address : '-'}}</span>
+                        </div>
+                        <div class="text-label">
+                            <span class="span-placeholder" >ZIP</span>
+                            <span>{{client.zip ? client.zip : '-'}}</span>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+
+            </div>
+        </div>
+    </div>
+</mat-drawer-container>

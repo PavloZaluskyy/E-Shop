@@ -1,0 +1,354 @@
+<mat-expansion-panel *ngIf="categories">
+    <mat-expansion-panel-header>
+        <mat-panel-title> CATEGORIES </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-selection-list #categoryRef [multiple]="false">
+        <mat-list-option selected="true" value="all" (click)="onShowCategory('all')">
+            <span  >{{ 'all' | titlecase }}</span>
+        </mat-list-option>
+        <mat-list-option *ngFor="let categoryDom of categories"  [value]="categoryDom.name"  (click)="onShowCategory(categoryDom.name)">
+            <!-- <span  >{{ category.name| titlecase }}</span> -->
+            
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> {{ categoryDom.name| titlecase }} </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-selection-list #subCategoryRef [multiple]="false" >
+                    <mat-list-option 
+                        *ngFor="let subCategorDom of categoryDom.subCategory"  
+                        [value]="subCategorDom"  
+                        (click)="onShowSubCategory(subCategorDom)">
+                        <span  >{{ subCategorDom | titlecase }}</span>
+                    </mat-list-option>
+                </mat-selection-list>
+            </mat-expansion-panel>
+        </mat-list-option>
+    </mat-selection-list>
+</mat-expansion-panel>
+<mat-expansion-panel *ngIf="brandsArr.length">
+    <mat-expansion-panel-header>
+        <mat-panel-title> BRANDS </mat-panel-title>
+    </mat-expansion-panel-header>
+    <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin" 
+                        [checked]="allCompleteBrands"
+                        
+                        [indeterminate]="someCompleteBrands()"
+                        (change)="setAllBrands($event.checked)">
+            All brands
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            @for (subtask of brandsArr; track subtask) {
+              <li>
+                <mat-checkbox 
+                              [class.active]="subtask.completed"
+                              [(ngModel)]="subtask.completed"
+                              (ngModelChange)="updateAllCompleteBrands()">
+                  {{subtask.name}}
+                </mat-checkbox>
+              </li>
+            }
+          </ul>
+        </span>
+      </section>
+</mat-expansion-panel>
+
+<mat-expansion-panel *ngIf="connectorArr.length">
+    <mat-expansion-panel-header>
+        <mat-panel-title> Connector  <span class="attention">* only for Electronics</span></mat-panel-title>
+    </mat-expansion-panel-header>
+    <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allCompleteConnection"
+                        
+                        [indeterminate]="someCompleteConnectors()"
+                        (change)="setAllConnectors($event.checked)">
+            All Connectors
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            @for (subtask of connectorArr; track subtask) {
+              <li>
+                <mat-checkbox 
+                              [(ngModel)]="subtask.completed"
+                              (ngModelChange)="updateAllCompleteConnectors()">
+                  {{subtask.name}}
+                </mat-checkbox>
+              </li>
+            }
+          </ul>
+        </span>
+      </section>
+</mat-expansion-panel>
+
+<mat-expansion-panel *ngIf="compatibilityArr.length">
+    <mat-expansion-panel-header>
+        <mat-panel-title> Compatibility  <span class="attention">* only for Electronics</span></mat-panel-title>
+    </mat-expansion-panel-header>
+    <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allCompleteCompatibility"
+                        
+                        [indeterminate]="someCompleteCompatibility()"
+                        (change)="setAllCompatibility($event.checked)">
+            All
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            @for (subtask of compatibilityArr; track subtask) {
+              <li>
+                <mat-checkbox 
+                              [(ngModel)]="subtask.completed"
+                              (ngModelChange)="updateAllCompatibility()">
+                  {{subtask.name}}
+                </mat-checkbox>
+              </li>
+            }
+          </ul>
+        </span>
+      </section>
+</mat-expansion-panel>
+
+<mat-expansion-panel *ngIf="sizeArr.length">
+    <mat-expansion-panel-header>
+        <mat-panel-title> Size  <span class="attention">* only for Electronics</span></mat-panel-title>
+    </mat-expansion-panel-header>
+    <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allComplateSize"
+                        
+                        [indeterminate]="someCompleteSize()"
+                        (change)="setAllSize($event.checked)">
+            All
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            @for (subtask of sizeArr; track subtask) {
+              <li>
+                <mat-checkbox 
+                              [(ngModel)]="subtask.completed"
+                              (ngModelChange)="updateAllSize()">
+                  {{subtask.name}}
+                </mat-checkbox>
+              </li>
+            }
+          </ul>
+        </span>
+      </section>
+</mat-expansion-panel>
+
+<mat-expansion-panel *ngIf="diagonalArr.length">
+    <mat-expansion-panel-header>
+        <mat-panel-title> Diagonal  <span class="attention">* only for Monitor</span></mat-panel-title>
+    </mat-expansion-panel-header>
+    <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allCompleteDiagonal"
+                        
+                        [indeterminate]="someCompleteDiagonal()"
+                        (change)="setAllDiagonal($event.checked)">
+            All
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            @for (subtask of diagonalArr; track subtask) {
+              <li>
+                <mat-checkbox 
+                              [(ngModel)]="subtask.completed"
+                              (ngModelChange)="updateAllDiagonal()">
+                  {{subtask.name}}
+                </mat-checkbox>
+              </li>
+            }
+          </ul>
+        </span>
+      </section>
+</mat-expansion-panel>
+
+<mat-expansion-panel *ngIf="screenExtensionArr.length">
+    <mat-expansion-panel-header>
+        <mat-panel-title>  Screen Extension <span class="attention">* only for Monitor</span></mat-panel-title>
+    </mat-expansion-panel-header>
+    <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allCompleteScreenExtension"
+                        
+                        [indeterminate]="someCompleteScreenExtension()"
+                        (change)="setAllScreenExtension($event.checked)">
+            All
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            @for (subtask of screenExtensionArr; track subtask) {
+              <li>
+                <mat-checkbox 
+                              [(ngModel)]="subtask.completed"
+                              (ngModelChange)="updateAllScreenExtension()">
+                  {{subtask.name}}
+                </mat-checkbox>
+              </li>
+            }
+          </ul>
+        </span>
+      </section>
+</mat-expansion-panel>
+
+<mat-expansion-panel *ngIf="refreshRateArr.length">
+    <mat-expansion-panel-header>
+        <mat-panel-title>  Refresh Rate <span class="attention">* only for Monitor</span></mat-panel-title>
+    </mat-expansion-panel-header>
+    <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allCompleteRefreshRate"
+                        
+                        [indeterminate]="someCompleteRefreshRate()"
+                        (change)="setAllRefreshRate($event.checked)">
+            All
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            @for (subtask of refreshRateArr; track subtask) {
+              <li>
+                <mat-checkbox 
+                              [(ngModel)]="subtask.completed"
+                              (ngModelChange)="updateAllRefreshRate()">
+                  {{subtask.name}}
+                </mat-checkbox>
+              </li>
+            }
+          </ul>
+        </span>
+      </section>
+</mat-expansion-panel>
+
+
+<mat-expansion-panel *ngIf="matrixTypeArr.length">
+    <mat-expansion-panel-header>
+        <mat-panel-title>  MATRIX TYPE <span class="attention">* only for Monitor</span></mat-panel-title>
+    </mat-expansion-panel-header>
+    <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allComplateMatrix"
+                        
+                        [indeterminate]="someCompleteMatrixType()"
+                        (change)="setAllMatrixType($event.checked)">
+            All
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            @for (subtask of matrixTypeArr; track subtask) {
+              <li>
+                <mat-checkbox 
+                              [(ngModel)]="subtask.completed"
+                              (ngModelChange)="updateAllMatrixType()">
+                  {{subtask.name}}
+                </mat-checkbox>
+              </li>
+            }
+          </ul>
+        </span>
+      </section>
+</mat-expansion-panel>
+
+
+<mat-expansion-panel *ngIf="materialArr.length">
+    <mat-expansion-panel-header>
+        <mat-panel-title>  Material </mat-panel-title>
+    </mat-expansion-panel-header>
+    <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allCompleteMaterial"
+                        
+                        [indeterminate]="someCompleteMaterial()"
+                        (change)="setAllMaterial($event.checked)">
+            All
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            @for (subtask of materialArr; track subtask) {
+              <li>
+                <mat-checkbox 
+                              [(ngModel)]="subtask.completed"
+                              (ngModelChange)="updateAllMaterial()">
+                  {{subtask.name}}
+                </mat-checkbox>
+              </li>
+            }
+          </ul>
+        </span>
+      </section>
+</mat-expansion-panel>
+
+<mat-expansion-panel *ngIf="purposeArr.length">
+    <mat-expansion-panel-header>
+        <mat-panel-title>  Purpose </mat-panel-title>
+    </mat-expansion-panel-header>
+    <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allComplatePurpose"
+                        
+                        [indeterminate]="someCompletePurpose()"
+                        (change)="setAllPurpose($event.checked)">
+            All
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            @for (subtask of purposeArr; track subtask) {
+              <li>
+                <mat-checkbox 
+                              [(ngModel)]="subtask.completed"
+                              (ngModelChange)="updateAllPurpose()">
+                  {{subtask.name}}
+                </mat-checkbox>
+              </li>
+            }
+          </ul>
+        </span>
+      </section>
+</mat-expansion-panel>
+<mat-slider [min]="minMaxPrice.min" step="1" discrete [max]="minMaxPrice.max">
+    <input  [(value)]="ratePrice.min" matSliderStartThumb>
+    <input [(value)]="ratePrice.max" matSliderEndThumb>
+  </mat-slider>
+  <div class="flex just-cont-space-bet">
+    <mat-form-field class="example-full-width">
+      <mat-label>Min Price</mat-label>
+      <input matInput #postalCode maxlength="5"  [class.not_valid_price]="!onValidatorPrice()" (ngModelChange)="updateRatePrice('min', $event)"  placeholder="20" [ngModel]="ratePrice.min">
+      <!-- <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint> -->
+      
+        <span class="err-price-massege" *ngIf="!onValidatorPrice()">Please enter a valid min price</span>
+      
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Max Price</mat-label>
+      <input matInput #postalCode maxlength="6" [class.not_valid_price]="!onValidatorPrice()" (ngModelChange)="updateRatePrice('max', $event)"  placeholder="9999" [ngModel]="ratePrice.max">
+      <span class="err-price-massege" *ngIf="!onValidatorPrice()">Please enter a valid max price</span>
+      
+      <!-- <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint> -->
+    </mat-form-field>
+  </div>
+<div class="flex just-cont-space-bet">
+    <button mat-raised-button (click)="onFilterEmit()" color="primary"> <mat-icon>filter_list</mat-icon> Filter</button>
+    <button mat-raised-button (click)="onClear()" color="primary"> <mat-icon>delete_sweep</mat-icon> Clear</button>
+</div>

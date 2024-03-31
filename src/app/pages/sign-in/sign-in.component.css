@@ -1,0 +1,70 @@
+.wrapper {
+    margin: 1rem 2rem;
+}
+::ng-deep .mat-mdc-icon-button{
+  display: none!important;
+}
+.example-card {
+    max-width: 45%;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .form-panel, .signUp-panel {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .mat-mdc-card-title-group{
+    justify-content: center;
+  }
+  .example-full-width {
+    width: 100%;
+    min-width: 150px;
+     max-width: 300px;
+  }
+
+  .m-b-1_2{
+    /* margin-top: 1.2rem; */
+    margin-bottom: 1.2rem;
+  }
+  .m-t-b-1_2{
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+
+  .example-section{
+    margin-bottom: 1.2rem;
+  }
+  .example-margin{
+    width: 1rem;
+    margin-right: 0.5rem;
+    position: relative;
+    top: 2px;
+  }
+  .label-checkbox{
+    font-size: 0.9rem;
+   
+  }
+
+  .forgot-password-span {
+    color: blue;
+    border-bottom: 1px dashed blue;
+    cursor: pointer;
+  }
+  .forgot-password-span:hover{
+    color: rgb(0, 110, 255);
+    border-bottom: 1px dashed rgb(0, 110, 255);
+  }
+
+  .not_valid_price {
+    color: red!important;
+}
+
+  .err-price-massege{
+    color: red;
+    font-size: 0.7rem;
+}

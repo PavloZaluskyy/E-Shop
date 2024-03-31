@@ -1,0 +1,21 @@
+.attention {
+    color: red;
+    font-size: .6rem;
+}
+
+mat-slider {
+    width: 90%;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.not_valid_price {
+    color: red!important;
+}
+
+.err-price-massege{
+    color: red;
+    font-size: 0.7rem;
+}

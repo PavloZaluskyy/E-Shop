@@ -1,0 +1,107 @@
+<mat-drawer-container  [autosize]="true" class="min-h-full max-w-7xl mx-auto border-x">
+    <div class="wrapper">
+        <div class="go_to_store flex">
+            <button mat-raised-button color="primary" routerLink="/home"><mat-icon class="text-while-500">arrow_back</mat-icon> Go to Back Store</button>
+        </div>
+    
+        <div class="flex align-stretch center self-center">
+            <div class="img">
+                <img [src]="product.image" [alt]="product.title">
+            </div>
+            <div class="info">
+                <mat-tab-group>
+                    <mat-tab label="About The Product"> 
+                            <h1>{{product.title}}</h1>
+                            <h3 class="text-gray-500">{{product.category}}</h3>
+                            <h4>{{product.description}}</h4>
+                            <div class="flex just-cont-space-bet">
+                                <div *ngIf="product?.size">
+                                    <span class="title">Choose Size:</span>
+                                    <div class="flex just-cont-space-arround">
+                                        <button [class.active-size]="size.isSelected" *ngFor="let size of selectedSize" mat-stroked-button (click)="onChooseSize(size)">{{size.name}}</button>
+                                    </div>
+                                </div>
+                                <div *ngIf="product?.colors">
+                                    <span class="title">Choose Colors:</span>
+                                    <div class="flex just-cont-space-bet">
+                                        <div class="colore_circle" [class.colore_circle_active]="color.isSelected" [ngStyle]="{backgroundColor: color.name}" *ngFor="let color of selectedColor" (click)="onChooseColor(color)" mat-stroked-button></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex just-cont-space-bet">
+                                <h2 class="price">{{product.price | currency}}</h2>
+                                <div class="quantity_block flex">
+                                    <button mat-icon-button [disabled]="quantity <= 1" (click)="onRemoveQuantity(product)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
+                                    <div class="quantity">
+                                            <span>Quantity</span>
+                                            <span> {{quantity}}</span>
+                                    </div>   
+                                    <button mat-icon-button [disabled]="quantity>=product.rating.count" (click)="onAddQuantity(product, $event)">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                    <span class="max-quantity"> / {{product.rating.count}}</span>
+                                </div>      
+                            </div>
+                <div class="flex">
+                    <button mat-raised-button color="primary" (click)="onAddToCart(product)"><mat-icon class="text-while-500">add_shopping_cart</mat-icon> Add to cart</button>
+                    <button mat-raised-button color="primary" class="btn-order"><mat-icon class="text-while-500">shopping_bag</mat-icon>Order </button>
+                </div>
+                    </mat-tab>
+                    <mat-tab label="Characteristics"> 
+                        <table *ngIf="product.characteristics" class="mat-elevation-z8">
+                            <tbody>
+                                <tr *ngFor="let item of product.characteristics | keyvalue">
+                                    <th>{{item.key}}</th>
+                                    <td>{{item.value}}</td>
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+                        <!-- <table mat-table *ngIf="product.characteristics" [dataSource]="product.characteristics" class="mat-elevation-z8">
+                            <ng-container matColumnDef="position">
+                                <th mat-header-cell *matHeaderCellDef> No. </th>
+                                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                              </ng-container>
+                        </table> -->
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+        <div >
+            <div class="filter-slides">
+                <!-- <button mat-button [matMenuTriggerFor]="menu">proposed</button>
+                    <mat-menu #menu="matMenu">
+                    <button mat-menu-item>Products of the same category</button>
+                    <button mat-menu-item>Products you recently viewed</button>
+                    </mat-menu> -->
+                    <mat-form-field class="w-full">
+                        <mat-label>PROPOSED</mat-label>
+                        <mat-select [(value)]="selected">
+                          @for (proposed of proposedFilter; track proposed) {
+                            <mat-option [value]="proposed.value">{{proposed.view}}</mat-option>
+                          }
+                        </mat-select>
+                    </mat-form-field>
+            </div>
+            
+                <mat-grid-list
+                    gutterSize="16"
+                    [cols]="4"
+                    [rowHeight]="296"
+                    *ngIf="selected === 'same'">
+                <mat-grid-tile *ngFor="let product of proposedProducts">
+                    <app-product-box (addToCart)="onAddToCart($event)" [product]='product' class="w-full"></app-product-box>
+                </mat-grid-tile>
+            </mat-grid-list>
+                    
+            
+        </div>
+        <div>
+            1
+        </div>
+    </div>
+    
+</mat-drawer-container>

@@ -1,0 +1,92 @@
+<mat-drawer-container [autosize]="true" class="min-h-full max-w-7xl mx-auto border-x">
+    <div class="wrapper">
+        <div class="go_to_store flex">
+            <button mat-raised-button color="primary" routerLink="/home"><mat-icon
+                    class="text-while-500">arrow_back</mat-icon> Go to Back Store</button>
+        </div>
+        <div class="form-panel">
+            <mat-card class="example-card" *ngIf="!forgotPass">
+                <mat-card-header>
+                    <mat-card-title-group>
+                        <mat-card-title>E-Shop</mat-card-title>
+                        <mat-card-subtitle>Sign In to account</mat-card-subtitle>
+                    </mat-card-title-group>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Login</mat-label>
+                        <input [class.not_valid_price]="!isNotValid" matInput [(ngModel)]="login">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Password</mat-label>
+                        <input type="password" [class.not_valid_price]="!isNotValid"  #pass [(ngModel)]="password" matInput>
+                        <div>
+                            <input type="checkbox" class="example-margin" (click)="showPassword(pass)"><label class="label-checkbox" for="remember">Show Password</label> 
+                        </div>
+                        <div>
+                            <span class="err-price-massege" *ngIf="!isNotValid">Not correct login or password</span>
+                        </div>
+                    </mat-form-field>
+                    <div>
+                        <section class="example-section">
+                            <input type="checkbox" name="remember" class="example-margin" [(ngModel)]="remember"> <label class="label-checkbox" for="remember">Remember me?</label>
+                        </section>
+                    </div>
+                    
+                    <div class="m-b-1_2"><span class="forgot-password-span" (click)="onForgotPass()">Forgot password?</span></div>
+                    
+                    <button (click)="onSignIn()" mat-raised-button color="primary"> Sign In</button>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="example-card" *ngIf="forgotPass">
+                <mat-card-header>
+                    <mat-card-title-group>
+                        <mat-card-title>E-Shop</mat-card-title>
+                        <mat-card-subtitle>Forgot your password?</mat-card-subtitle>
+                    </mat-card-title-group>
+                </mat-card-header>
+            
+            <mat-card-content *ngIf="forgotPass">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Login</mat-label>
+                    <input [class.not_valid_price]="!isNotValid" matInput [(ngModel)]="login">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>New password</mat-label>
+                    <input type="password" [class.not_valid_price]="!isNotValidNewPass"  #newPass [(ngModel)]="newPassword" matInput>
+                    <div>
+                        <input type="checkbox" class="example-margin" (click)="showPassword(newPass)"><label class="label-checkbox" for="remember">Show Password</label> 
+                    </div>
+                    <div>
+                        <span class="err-price-massege" *ngIf="!isNotValidNewPass">Not correct new password</span>
+                    </div>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Confirm password</mat-label>
+                    <input type="password" [class.not_valid_price]="!isNotValidConfPass"  #confPass [(ngModel)]="confirmPassword" matInput>
+                    <div>
+                        <input type="checkbox" class="example-margin" (click)="showPassword(confPass)"><label class="label-checkbox" for="remember">Show Password</label> 
+                    </div>
+                    <div>
+                        <span class="err-price-massege" *ngIf="!isNotValidConfPass">Repeat the new password correctly</span>
+                    </div>
+                </mat-form-field>
+                <button (click)="onSaveNewPass()" mat-raised-button color="primary">Save new password</button>
+                <div class="m-t-b-1_2"><span class="forgot-password-span" (click)="onForgotPass()">Remembered the old password?</span></div>
+            </mat-card-content>
+            </mat-card>
+
+        </div>
+
+        <div class="signUp-panel">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>New to E-Shop?</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <span routerLink="/signUp" class="forgot-password-span">Create account</span>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</mat-drawer-container>
