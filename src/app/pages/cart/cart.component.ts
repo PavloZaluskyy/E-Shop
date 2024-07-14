@@ -3,6 +3,7 @@ import { Cart, CartItem } from '../models/cart.model';
 import { CartService } from '../../services/cart.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Client } from '../models/client';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -38,7 +39,7 @@ export class CartComponent implements OnInit {
 
   dataSource: CartItem[] = [];
 
-  constructor (private _cartService: CartService, private _localStorage: LocalStorageService) {}
+  constructor (private _cartService: CartService, private _localStorage: LocalStorageService, private router: Router) {}
 
   ngOnInit(){
     this._cartService.cart.subscribe((_cart: Cart) => {
@@ -62,6 +63,8 @@ export class CartComponent implements OnInit {
     this._cartService.removeFromCart(item);
   }
 
-  onCheckout(){}
+  onCheckout(){
+    this.router.navigate(['/order']);
+  }
 
 }

@@ -14,4 +14,14 @@ export interface Client {
     photo?: string;
     password?: string,
     cart?: CartItem[];
+    // payment?: Payment;
+    codeCard?: string;
+    termCard?: string;
+    cvv?: string;
+}
+
+export interface Payment {
+    codeCard: string;
+    termCard: string;
+    cvv: string;
 }

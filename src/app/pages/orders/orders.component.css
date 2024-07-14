@@ -1,0 +1,47 @@
+.wrapper {
+    margin: 1rem 2rem;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid rgb(140 140 140);
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin-top: 2rem;
+  }
+  th,
+  td {
+    border: 1px solid rgb(160 160 160);
+    padding: 8px 10px;
+  }
+  
+  td:last-of-type {
+    text-align: center;
+  }
+  
+  tbody > tr:nth-of-type(even) {
+    background-color: rgb(237 238 242);
+  }
+  .list-products{width: 45%;}
+
+  .order-form{ width: 50%;}
+  .w-70{
+    width: 70%;
+  }
+  .m-l-1 {
+    margin-left: 1rem;
+  }
+  

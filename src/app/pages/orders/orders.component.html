@@ -1,1 +1,124 @@
-<p>orders works!</p>
+<mat-drawer-container  [autosize]="true" class="min-h-full max-w-7xl mx-auto border-x">
+    <div class="wrapper">
+        <div class="go_to_store flex">
+            <button mat-raised-button color="primary" routerLink="/home"><mat-icon class="text-while-500">arrow_back</mat-icon> Go to Back Store</button>
+        </div>
+        <div class="flex align-stretch self-center">
+            <div class="list-products">
+                <table *ngIf="cart" class="mat-elevation-z8">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of cart">
+                            <th>
+                                {{item.name}}  
+                                <span *ngIf="item.chooseDetail">[<span *ngFor="let choose of item.chooseDetail">{{choose}}, </span>]</span>
+                            </th>
+                            <td>x{{item.quantity}}</td>
+                            <td>{{item.price}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                          <th scope="row" colspan="2" style="text-align: right;">Total: </th>
+                          <td><span class="font-bold not-italic">{{ getTotal(cart) | currency}}</span></td>
+                        </tr>
+                      </tfoot>
+                    
+                </table>
+            </div>
+            <div class="order-form">
+                <mat-stepper [linear]="true" #stepper>
+                    <mat-step [stepControl]="firstFormGroup">
+                        <form [formGroup]="firstFormGroup" class="flex flex-column">
+                            <ng-template matStepLabel>Fill out your name</ng-template>
+                            <mat-form-field class="w-70">
+                                <mat-label>Name</mat-label>
+                                <input matInput placeholder="Last name, First name" formControlName="name" required>
+                            </mat-form-field>
+                            <mat-form-field class="w-70">
+                                <mat-label>Company</mat-label>
+                                <input matInput placeholder="Company" formControlName="company">
+                            </mat-form-field>
+                            <mat-form-field class="w-70">
+                                <mat-label>E-mail</mat-label>
+                                <input matInput placeholder="e-mail" formControlName="email" required>
+                            </mat-form-field>
+                            <mat-form-field class="w-70">
+                                <mat-label>Tell</mat-label>
+                                <input matInput placeholder="phone" formControlName="phone" required>
+                            </mat-form-field>
+                              <div>
+                                <button mat-raised-button color="primary" matStepperNext>Next <mat-icon class="text-while-500">arrow_forward</mat-icon></button>
+                              </div>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+                        <form [formGroup]="secondFormGroup">
+                            <mat-form-field class="w-70">
+                                <mat-label>Country</mat-label>
+                                <input matInput placeholder="Country" formControlName="countryCtrl" required>
+                            </mat-form-field>
+                            <mat-form-field class="w-70">
+                                <mat-label>State</mat-label>
+                                <input matInput placeholder="State" formControlName="stateCtrl" required>
+                            </mat-form-field>
+                          <mat-form-field class="w-70">
+                            <mat-label>Address</mat-label>
+                            <input matInput formControlName="addressCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                                   required>
+                          </mat-form-field>
+                          <mat-form-field class="w-28 m-l-1">
+                            <mat-label>Zip</mat-label>
+                            <input matInput placeholder="ZIP" maxlength="6" formControlName="zipCtrl" required>
+                        </mat-form-field>
+                          <div>
+                            <button mat-raised-button color="primary" matStepperPrevious><mat-icon class="text-while-500">arrow_back</mat-icon> Back</button>
+                            <button mat-raised-button color="primary" class="m-l-1" matStepperNext>Next <mat-icon class="text-while-500">arrow_forward</mat-icon></button>
+                          </div>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="thirdFormGroup" label="Payment">
+                        <form [formGroup]="thirdFormGroup">
+                            <mat-form-field class="w-70">
+                                <mat-label>Number Card</mat-label>
+                                <input matInput placeholder="" maxlength="16" formControlName="numberCardCtrl" required>
+                            </mat-form-field>
+                            <mat-form-field class="w-30" >
+                                <mat-label>Term</mat-label>
+                                <input matInput placeholder="Term" maxlength="4" formControlName="termCtrl" required>
+                            </mat-form-field>
+                            <mat-form-field class="w-30 m-l-1">
+                                <mat-label>CVV</mat-label>
+                                <input matInput placeholder="CVV" maxlength="3" formControlName="cvvCtrl" required>
+                            </mat-form-field>
+                            <div>
+                                <button mat-raised-button color="primary" matStepperPrevious> <mat-icon class="text-while-500">arrow_back</mat-icon>Back</button>
+                                <button mat-raised-button matStepperNext color="primary"  class="m-l-1">Next <mat-icon class="text-while-500">arrow_forward</mat-icon></button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step>
+                        <ng-template matStepLabel>Done</ng-template>
+                        <p>Checked the data, continue the order?</p>
+                        <div>
+                          <button mat-raised-button color="primary" matStepperPrevious> <mat-icon class="text-while-500">arrow_back</mat-icon>Back</button>
+                          <button mat-raised-button color="primary"  class="m-l-1" (click)="stepper.reset()"><mat-icon class="text-while-500">refresh</mat-icon> Reset</button>
+                          <button mat-raised-button color="primary"  class="m-l-1" (click)="sentOrder()"> <mat-icon class="text-while-500">shopping_cart</mat-icon> Sent order</button>
+                        </div>
+                    </mat-step>
+                   
+                
+                </mat-stepper>
+                <!-- <button mat-button (click)="saveData()">save</button> -->
+                <input type="checkbox"  [(ngModel)]="isSaveData" class="example-margin" name="save"><label class="label-checkbox" for="save">Save your data?</label>
+                <!-- <mat-checkbox class="example-margin" [(ngModel)]="saveData"> Save your data?</mat-checkbox> -->
+            </div>
+        </div>
+    </div>
+</mat-drawer-container>

@@ -6,6 +6,7 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-in/component/sign-up/sign-up.component';
 import { ProfilesClientComponent } from './pages/profiles-client/profiles-client.component';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 const routes: Routes = [{
   path: 'home',
@@ -30,7 +31,12 @@ const routes: Routes = [{
 {
   path: 'profile/:username',
   component: ProfilesClientComponent
-},{
+},
+{
+  path: 'order',
+  component: OrdersComponent
+},
+{
   path: '', redirectTo: 'home', pathMatch: 'full'
 }];
 

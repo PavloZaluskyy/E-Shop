@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
+import {ReactiveFormsModule} from '@angular/forms';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -41,6 +41,8 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-in/component/sign-up/sign-up.component';
 import { ProfilesClientComponent } from './pages/profiles-client/profiles-client.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import {MatStepperModule} from '@angular/material/stepper';
+
 
 @NgModule({
   declarations: [
@@ -84,6 +86,9 @@ import { OrdersComponent } from './pages/orders/orders.component';
     MatCheckboxModule,  
     MatSliderModule,
     MatTabsModule,
+    MatStepperModule,
+    ReactiveFormsModule
+
   ],
   providers: [
     provideClientHydration(),
